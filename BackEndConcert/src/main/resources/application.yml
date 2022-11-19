@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/FirmaConcert
+    username: postgres
+    password: parezax2
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      dialect: org.hibernate.dialect.PostgreSQL82Dialect
+      format_sql: false
+      javax:
+        persistence:
+          validation:
+            mode: none
+    open-in-view: false
+server:
+  port:
+    8082
