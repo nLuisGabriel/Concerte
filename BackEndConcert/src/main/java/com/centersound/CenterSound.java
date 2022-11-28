@@ -64,7 +64,7 @@ public class CenterSound {
         if(customerRepository.count()==0){
             Customer customer = new Customer();
             customer.setEmail("nedelculuisgabriel@gmail.com");
-            customer.setPassword("parola123");
+            customer.setPassword("parola1234");
             customer.setName("Luis Gabriel");
             customer.setAge(21);
             customer.setPhoneNumber("0760252777");
