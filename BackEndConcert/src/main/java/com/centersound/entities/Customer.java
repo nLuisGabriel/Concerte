@@ -1,25 +1,26 @@
 package com.centersound.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
 @Table(name = "customers")
 public class Customer extends User{
     @Column(name = "name", nullable = false)
-    String name;
+    private String name;
     @Min(value = 4, message = "must be equal or greater than 4")
     @Column(name = "age", nullable = false)
-    Integer age;
+    private Integer age;
     @Column(name = "phone_number", nullable = false)
-    String phoneNumber;
+    private String phoneNumber;
+
+    @Column(name = "registration_date")
+    private LocalDateTime localDateTime = LocalDateTime.now();
 
     @OneToMany(mappedBy = "customer")
-    Set<Order> orders;
+    private Set<Order> orders;
 
     public String getName() {
         return name;
@@ -44,8 +45,6 @@ public class Customer extends User{
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-
 
 
 }

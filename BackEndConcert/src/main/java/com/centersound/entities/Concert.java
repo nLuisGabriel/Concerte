@@ -14,36 +14,36 @@ public class Concert {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", referencedColumnName = "id")
-    Location location;
+    private Location location;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-    MusicalCategory category;
+    private MusicalCategory category;
 
     @Column(name="name", nullable = false)
-    String name;
+    private String name;
 
     @Column(name="date", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd hh-mm-ss", shape = JsonFormat.Shape.STRING)
-    LocalDateTime date;
+    private LocalDateTime date;
 
     @Column(name = "PRICE", scale = 2, nullable = false)
-    BigDecimal price;
+    private BigDecimal price;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name="concert_artist",
             joinColumns =  @JoinColumn(name="concert_id"),
             inverseJoinColumns = @JoinColumn(name="artist_id")
     )
-    Set<Artist> artists;
+    private Set<Artist> artists;
 
     @OneToMany(mappedBy = "concert")
-    Set<Order> orders;
+    private Set<Order> orders;
 
 
     public Location getLocation() {

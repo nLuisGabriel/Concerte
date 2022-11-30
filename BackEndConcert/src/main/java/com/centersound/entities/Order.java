@@ -10,21 +10,21 @@ import java.time.LocalDateTime;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    @ManyToOne
+    private Long id;
+    @ManyToOne()
     @JoinColumn(name = "concert_id")
-    Concert concert;
+    private Concert concert;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "customer_id")
-    Customer customer;
+    private Customer customer;
 
     @Column(name = "registeredAt")
-    LocalDateTime registeredAt;
+    private LocalDateTime registeredAt = LocalDateTime.now();
 
     @Column(name = "orderStatus")
     @Enumerated(value = EnumType.STRING)
-    OrderStatus orderStatus;
+    private OrderStatus orderStatus;
 
     public Long getId() {
         return id;
