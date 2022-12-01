@@ -9,6 +9,8 @@ public class MusicalCategoryDto {
     Long id;
     Category category;
 
+    String details;
+
     public Long getId() {
         return id;
     }
@@ -23,6 +25,14 @@ public class MusicalCategoryDto {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     @Override

@@ -13,7 +13,10 @@ public class MusicalCategory {
 
     @Column(name="category")
     @Enumerated(value = EnumType.STRING)
-    Category category;
+    private Category category;
+
+    @Column(name = "description")
+    private String details;
 
     @OneToOne(mappedBy = "category")
     private Concert concert;
@@ -24,6 +27,14 @@ public class MusicalCategory {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public Category getCategory() {
