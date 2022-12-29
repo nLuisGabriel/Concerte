@@ -17,4 +17,9 @@ public class ConcertController implements ConcertControllerInterface {
     public List<ConcertDto> findAllConcerts() {
         return concertServiceInterface.findAllConcerts();
     }
+
+    @Override
+    public List<ConcertDto> findAllConcertsByArtistId(Long artistId) {
+        return concertServiceInterface.findAllByArtist(artistId);
+    }
 }

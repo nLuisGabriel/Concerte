@@ -1,11 +1,14 @@
 package com.centersound.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 
 public class CustomerDto extends UserDto{
     private String name;
     private Integer age;
     private String phoneNumber;
+    @JsonFormat(pattern = "yyyy-MM-dd hh-mm-ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime localDateTime;
 
     public String getName() {

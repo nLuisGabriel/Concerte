@@ -4,6 +4,7 @@ import com.centersound.entities.*;
 import com.centersound.enums.Category;
 import com.centersound.enums.Gender;
 import com.centersound.enums.GeographicRegion;
+import com.centersound.enums.OrderStatus;
 import com.centersound.repositories.*;
 import com.github.javafaker.Faker;
 import org.modelmapper.ModelMapper;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -18,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
@@ -41,13 +44,18 @@ public class CenterSound {
 
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public static void main(String[] args) {
         SpringApplication.run(CenterSound.class, args);
     }
 
     @PostConstruct
-    private void populare() throws FileNotFoundException {
+    private void population() throws FileNotFoundException {
+
+
+
         if (concertRepository.count() == 0) {
             try {
                 File myObj = new File("D:\\\\WEB Project\\\\BackEndConcert\\\\src\\\\main\\\\resources\\\\cv-unique-has-end-punct-sentences.csv");
@@ -68,6 +76,32 @@ public class CenterSound {
         generateLocations();
         generateConcerts();
         generateCustomer();
+        generateOrders();
+    }
+
+    private void generateOrders(){
+        List<Concert> concertList = concertRepository.findAll();
+        List<Customer> customerList = customerRepository.findAll();
+        if(orderRepository.count()==0){
+            for(Customer customer: customerList){
+                List<Integer> list = new ArrayList<>();
+                for (int i = 0; i < 10; i++) {
+                    int minVal = 0;
+                    int maxVal = customerList.size()-1;
+                    int randInt = ThreadLocalRandom.current().nextInt(minVal, maxVal);
+                    list.add(randInt);
+                }
+                for(Integer number: list){
+                    Order order = new Order();
+                    order.setCustomer(customer);
+                    order.setConcert(concertList.get(number));
+                    order.setOrderStatus(OrderStatus.ACCEPTED);
+                    Long result = Long.valueOf(faker.number().numberBetween(1, 9));
+                    order.setTickets(result);
+                    orderRepository.save(order);
+                }
+            }
+        }
     }
 
     private void generateCustomer() {
@@ -76,7 +110,7 @@ public class CenterSound {
                 Customer customer = new Customer();
                 customer.setEmail(faker.name().username() + "@mail.com");
                 customer.setAge(faker.random().nextInt(8, 50));
-                customer.setPassword("defaultPassword123!");
+                customer.setPassword(passwordEncoder.encode("defaultPassword123!"));
                 customer.setPhoneNumber(faker.phoneNumber().phoneNumber());
                 customer.setName(faker.name().fullName());
                 customerRepository.save(customer);
@@ -142,7 +176,7 @@ public class CenterSound {
                 artist.setBirthDate(faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 artist.setGeographicRegion(GeographicRegion.random());
                 artist.setName(faker.name().fullName());
-                artist.setDescription(descriptions.get((faker.number().numberBetween(1, 47))));
+                artist.setDescription(descriptions.get((faker.number().numberBetween(1, 40))));
                 artists.add(artist);
             }
             artistRepository.saveAll(artists);

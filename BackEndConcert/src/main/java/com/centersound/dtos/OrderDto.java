@@ -10,6 +10,15 @@ public class OrderDto {
     private CustomerDto customerDto;
     private LocalDateTime registeredAt;
     private OrderStatus orderStatus;
+    private Long tickets;
+
+    public Long getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Long tickets) {
+        this.tickets = tickets;
+    }
 
     public Long getId() {
         return id;

@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/org.yaml/snakeyaml
+
     implementation 'org.yaml:snakeyaml:1.33'
 
     implementation 'org.springframework.boot:spring-boot-starter-validation:2.7.5'
@@ -22,8 +22,11 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.0'
-    // https://mvnrepository.com/artifact/com.github.javafaker/javafaker
+
     implementation 'com.github.javafaker:javafaker:1.0.2'
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.7.3'
+
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
 }
 

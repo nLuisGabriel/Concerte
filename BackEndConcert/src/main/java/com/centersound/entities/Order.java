@@ -3,6 +3,7 @@ package com.centersound.entities;
 import com.centersound.enums.OrderStatus;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,6 +26,18 @@ public class Order {
     @Column(name = "orderStatus")
     @Enumerated(value = EnumType.STRING)
     private OrderStatus orderStatus;
+
+    @Column(name = "number_of_tickets" )
+    @Max(10)
+    private Long tickets;
+
+    public Long getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Long tickets) {
+        this.tickets = tickets;
+    }
 
     public Long getId() {
         return id;
