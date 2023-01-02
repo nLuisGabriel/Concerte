@@ -1,0 +1,78 @@
+<title>Register Page</title>
+<div class="register-title">
+  <h4 >Register Account</h4>
+  <div class="image">
+    <img alt="image" src="assets/images/register.png" width="50" height="50">
+  </div>
+</div>
+
+<div class="register-container">
+  <div class="login-container">
+    <div class="RegisterAndInfo">
+      <form [formGroup]="registerForm" (ngSubmit)="Register()">
+        <label for="mail">Email</label>
+        <div class="p-float-label">
+          <input id="mail" type="email" formControlName="mail" pInputText>
+          <small class="p-error" *ngIf="registerForm.get('mail')?.invalid && registerForm.get('mail')?.touched">Incorrect mail format!</small>
+        </div>
+
+        <label for="username">Username</label>
+        <div class="p-float-label">
+          <input id="username" type="text" formControlName="name" pInputText>
+          <small class="p-error" *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">Username must have 5 characters!</small>
+        </div>
+
+        <label for="password">Password</label>
+        <div class="p-float-label">
+          <input id="password" type="password" formControlName="password" pInputText>
+          <small class="p-error" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">Incorrect password format!</small>
+        </div>
+
+        <label for="password2">Verify Password</label>
+        <div class="p-float-label">
+          <input id="password2" type="password" formControlName="verifyPassword" pInputText>
+        </div>
+
+        <label for="age">Age</label>
+        <div class="p-float-label">
+          <input id="age" type="number" min="18" max="150" formControlName="age" pInputText>
+          <small class="p-error" *ngIf="registerForm.get('age')?.invalid && registerForm.get('age')?.touched">Incorrect age format!</small>
+        </div>
+
+        <label for="pn">Phone Number</label>
+        <div class="p-float-label">
+          <input id="pn" type="text" formControlName="phoneNumber" pInputText>
+          <small class="p-error" *ngIf="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched">Incorrect phoneNumber format!</small>
+        </div>
+
+        <div class="buttons">
+          <button [disabled]="this.registerForm.invalid" pButton type="submit" label="Register" ></button>
+          <button (click)="toLoginPage()" pButton type="button" label="To login page" ></button>
+        </div>
+
+      </form>
+      <div>
+        <p-card styleClass="card">
+          <ng-template pTemplate="header">
+            <h3>Password must have:</h3>
+          </ng-template>
+          <h4>* One digit!
+            <i *ngIf="containDigits" class="pi pi-check"></i>
+          </h4>
+          <h4>* One big letter!
+            <i *ngIf="containCapitalLetter" class="pi pi-check"></i>
+          </h4>
+          <h4 >* One small letter!
+            <i *ngIf="containSmallLetter" class="pi pi-check"></i>
+          </h4>
+          <h4 >* One symbol!
+            <i *ngIf="containSymbol"  class="pi pi-check"></i></h4>
+          <h4 >* Size: min=8 and max=20
+            <i *ngIf="correctSize" class="pi pi-check"></i></h4>
+        </p-card>
+      </div>
+    </div>
+  </div>
+</div>
+<p-toast position="top-left" key="s"></p-toast>
+<p-toast position="top-left" key="e"></p-toast>

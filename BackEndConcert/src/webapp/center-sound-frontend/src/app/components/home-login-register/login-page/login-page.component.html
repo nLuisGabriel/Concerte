@@ -1,0 +1,31 @@
+<title>Login Page</title>
+<div class="login-field">
+  <div class="login-container">
+
+    <div>
+      <img src="assets/images/login.png" width="50" height="50" alt="login-icon">
+      <h4 class="labelForm">Login Form</h4>
+    </div>
+
+    <form id ="formId" [formGroup]="loginForm" (ngSubmit)="Login()">
+      <label for="mail">Email</label>
+      <span class="p-float-label">
+    <input id="mail" type="text" formControlName="mail" pInputText>
+</span>
+      <label for="password">Password</label>
+      <span class="p-float-label">
+    <input id="password" type="password" formControlName="password" pInputText >
+</span>
+      <button  pButton type="submit" label="Login" ></button>
+    </form>
+    <p class="error" *ngIf="successfulLogin==false">Username or password that you have entered cannot be found!</p>
+    <div class="toRegisterPageDiv">
+      <h6  (click)="goToRegisterPage()" class="toRegisterPage">
+        If you need an account Click Here!
+      </h6>
+    </div>
+  </div>
+
+
+</div>
+

@@ -1,0 +1,30 @@
+<div class="big-container">
+  <div class="title-container">
+    <h1>  Welcome to CenterSound</h1>
+    <p>
+      Here are best concert site in the world. Here you will find the hottest artists with their best songs. You've come to the right place for fun.
+    </p>
+    <div class="options">
+      <button (click)="goToLoginPage()"  pButton pRipple type="button" label="To login page" class="p-button-raised p-button-text"></button>
+      <button (click)="goToRegisterPage()"  pButton pRipple type="button" label="To register page" class="p-button-raised p-button-secondary p-button-text"></button>
+    </div>
+  </div>
+
+</div>
+
+
+<div class = "container">
+  <div class= "mini">
+    <p-galleria  [value]="images" [responsiveOptions]="responsiveOptions" [numVisible]="3" >
+      <ng-template pTemplate="item" let-item>
+        <img [src]="item.previewImageSrc" style="width: 100%; display: block;"/>
+      </ng-template>
+      <ng-template pTemplate="thumbnail" let-item>
+        <div class="grid grid-nogutter justify-content-center">
+          <img [src]="item.thumbnailImageSrc" style="display: block; width: 100%"/>
+        </div>
+      </ng-template>
+    </p-galleria>
+  </div>
+</div>
+

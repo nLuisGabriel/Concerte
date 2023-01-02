@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 @Service
@@ -24,5 +25,15 @@ public class ArtistService implements ArtistServiceInterface {
                     ArtistDto artistDto = modelMapper.map(currentArtist, ArtistDto.class);
                     return artistDto;
                 }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ArtistDto> getAllByConcertId(Long concertId) {
+        List<ArtistDto> artistDtos = new ArrayList<>();
+        artistDtos =  this.artistRepository.artistsByConcertId(concertId).stream().map((currentArtist ->{
+            ArtistDto artistDto = modelMapper.map(currentArtist, ArtistDto.class);
+            return artistDto;
+        })).collect(Collectors.toList());
+        return artistDtos;
     }
 }

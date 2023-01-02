@@ -1,0 +1,68 @@
+:host ::ng-deep p-panel {
+  .p-component {
+    margin-right: 20px;
+  }
+}
+.customer-info{
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+.table-div{
+
+  ::ng-deep p-table{
+    width: 50%;
+    .p-datatable-header{
+      color: white;
+      border-radius: 10px 10px 0 0;
+      border-color: #6699CC;
+      text-align: center;
+      font-size: 25px;
+      font-weight: bold;
+      font-family: Arial, serif;
+      background-color:#6699CC;
+
+    }
+    .p-datatable-thead{
+      tr{
+          width: 60%;
+        th{
+          input{
+            width: 50%;
+          }
+          text-align: center;
+          background-color: #6699CC;
+          border-style: solid;
+          border-color: #6699CC;
+        }
+
+      }
+
+    }
+    .p-datatable-tbody{
+      tr{
+
+        background-color: #6699CC;
+        border-left-color: #6699CC;
+        td:first-child{
+          border-left-color: #6699CC;
+        }
+        td:last-child{
+          border-right-color: #6699CC;
+          button:nth-child(2){
+            margin-right: 5px;
+            margin-left: 5px;
+          }
+
+        }
+        td{
+          text-align: center;
+        }
+
+      }
+    }
+  }
+}

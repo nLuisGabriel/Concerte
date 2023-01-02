@@ -1,0 +1,38 @@
+//menuTabStyle
+.header-container{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  img{
+    margin-right: 10px;
+    width: fit-content;
+    height: available;
+  }
+}
+
+:host ::ng-deep .menuTabStyle.p-tabmenu{
+  .p-tabmenu-nav-content{
+    border-radius: 10px;
+  }
+  .p-tabmenu-nav{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+  }
+  .p-menuitem-text{
+    color: darkcyan;
+  }
+  .p-menuitem-icon{
+    color: darkcyan;
+  }
+  .p-tabmenuitem:nth-child(3){
+    margin-right: 50px;
+  }
+  .p-tabmenu-nav-container{
+    width: fit-content;
+  }
+
+}
+

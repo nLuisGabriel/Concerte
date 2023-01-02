@@ -5,6 +5,6 @@ import com.centersound.entities.Customer;
 import com.centersound.exceptions.CustomerWithEmailAlreadyExists;
 
 public interface CustomerServiceInterface {
-    CustomerDto getLoggedCustomerInfo(Long customerId);
+    CustomerDto getLoggedCustomerInfo(String email);
     CustomerDto registerNewCustomer(Customer customer) throws CustomerWithEmailAlreadyExists;
 }

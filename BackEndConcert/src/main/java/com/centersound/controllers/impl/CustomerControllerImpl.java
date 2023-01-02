@@ -13,8 +13,8 @@ public class CustomerControllerImpl implements CustomerControllerInterface {
     @Autowired
     CustomerServiceInterface customerServiceInterface;
     @Override
-    public CustomerDto getLoggedCustomerInfo(Long customerId) {
-        return customerServiceInterface.getLoggedCustomerInfo(customerId);
+    public CustomerDto getLoggedCustomerInfo(String email) {
+        return customerServiceInterface.getLoggedCustomerInfo(email);
     }
 
     @Override

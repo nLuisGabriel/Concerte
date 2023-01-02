@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -67,6 +68,7 @@ public class OrderServiceImpl implements OrderServiceInterface {
         order.setConcert(concert);
         order.setCustomer(customer);
         order.setTickets(quantity);
+        order.setTotal(concert.getPrice().multiply(BigDecimal.valueOf(quantity)));
         try{
             Order order1 = orderRepository.save(order);
             OrderDto orderDto = modelMapper.map(order1, OrderDto.class);

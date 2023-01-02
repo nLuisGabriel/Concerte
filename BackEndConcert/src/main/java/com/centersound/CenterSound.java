@@ -98,6 +98,7 @@ public class CenterSound {
                     order.setOrderStatus(OrderStatus.ACCEPTED);
                     Long result = Long.valueOf(faker.number().numberBetween(1, 9));
                     order.setTickets(result);
+                    order.setTotal(order.getConcert().getPrice().multiply(BigDecimal.valueOf(result)));
                     orderRepository.save(order);
                 }
             }

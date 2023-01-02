@@ -2,6 +2,7 @@ package com.centersound.dtos;
 
 import com.centersound.enums.Gender;
 import com.centersound.enums.GeographicRegion;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -10,6 +11,7 @@ public class ArtistDto {
     private Long id;
     private String name;
     private String description;
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     private LocalDate birthDate;
     private Gender gender;
     private GeographicRegion geographicRegion;

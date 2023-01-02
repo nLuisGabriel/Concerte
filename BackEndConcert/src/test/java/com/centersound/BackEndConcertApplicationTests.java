@@ -52,7 +52,7 @@ class BackEndConcertApplicationTests {
     void t2_getLoggedCustomerInfo(){
         Optional<Customer> customer = customerRepository.findByEmail(MAIL_MAIL_COM);
         if(customer.isPresent()){
-            CustomerDto customerDto = customerServiceInterface.getLoggedCustomerInfo(customer.get().getId());
+            CustomerDto customerDto = customerServiceInterface.getLoggedCustomerInfo(MAIL_MAIL_COM);
             Assertions.assertNotNull(customerDto);
             Assertions.assertNotNull(customerDto.getId());
         }

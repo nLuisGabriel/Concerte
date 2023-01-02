@@ -19,4 +19,10 @@ public class ArtistController implements ArtistControllerInterface {
     public List<ArtistDto> findAllArtists() {
         return artistServiceInterface.getAll();
     }
+
+    @Override
+    public List<ArtistDto> findAllArtistByConcertId(Long concertId) {
+        return artistServiceInterface.getAllByConcertId(concertId);
+    }
+
 }

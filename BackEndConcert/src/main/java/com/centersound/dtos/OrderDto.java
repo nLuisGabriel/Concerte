@@ -2,6 +2,7 @@ package com.centersound.dtos;
 
 import com.centersound.enums.OrderStatus;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class OrderDto {
@@ -11,6 +12,15 @@ public class OrderDto {
     private LocalDateTime registeredAt;
     private OrderStatus orderStatus;
     private Long tickets;
+    private BigDecimal total;
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
 
     public Long getTickets() {
         return tickets;

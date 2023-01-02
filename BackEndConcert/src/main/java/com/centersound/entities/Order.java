@@ -4,6 +4,7 @@ import com.centersound.enums.OrderStatus;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -30,6 +31,17 @@ public class Order {
     @Column(name = "number_of_tickets" )
     @Max(10)
     private Long tickets;
+
+    @Column(name = "total")
+    private BigDecimal total;
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
 
     public Long getTickets() {
         return tickets;

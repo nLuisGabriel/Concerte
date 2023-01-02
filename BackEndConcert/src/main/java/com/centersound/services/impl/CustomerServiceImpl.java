@@ -28,9 +28,9 @@ public class CustomerServiceImpl implements CustomerServiceInterface {
 
 
     @Override
-    public CustomerDto getLoggedCustomerInfo(Long customerId) {
-        Optional<Customer> customer = customerRepository.findById(customerId);
-        if(customer.isPresent()){
+    public CustomerDto getLoggedCustomerInfo(String email) {
+        Optional<Customer> customer = customerRepository.findByEmail(email);
+        if(Boolean.TRUE.equals(customer.isPresent())){
             CustomerDto customerDto = modelMapper.map(customer.get(), CustomerDto.class);
             return customerDto;
         }

@@ -1,0 +1,114 @@
+.register-title{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 20px;
+  align-items: baseline;
+  h4{
+    color: white;
+    font-family: 'Helvetica Neue',
+    sans-serif; font-size: 46px;
+    font-weight: 100;
+    line-height: 50px;
+    letter-spacing: 1px;
+    padding: 0 0 40px;
+    margin-right: 10px;
+  }
+
+}
+
+
+.register-container{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  //margin-top: 10px;
+
+}
+
+.RegisterAndInfo{
+  display: flex;
+  margin-top: 15px;
+  width: auto;
+}
+
+.login-container{
+
+  width: 600px;
+
+  grid-column: 1;
+  background-color: azure;
+  border-radius: 17px;
+  border: 1rem solid azure;
+
+}
+form {
+  flex-direction: column;
+  text-align:center;
+}
+button{
+  margin-top: 10px;
+  display: flex;
+}
+label { font-size: 17px; display: flex;
+  font-family: Ebrima, serif}
+input{
+  width: 290px;
+  display: flex;
+  margin-top: 6px;
+}
+.error{
+  margin-top: 20px;
+  color: red;
+}
+.info{
+  width: 300px;
+  border-style: groove;
+  border-color: cornflowerblue;
+}
+:host ::ng-deep .card.p-card{
+  .p-card-header{
+    margin-top: 5px;
+    background-color: cornflowerblue;
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 20px;
+    width: auto;
+    text-align: center;
+    color: azure;
+  }
+}
+:host ::ng-deep .card.p-card{
+  margin-left: 20px;
+  height: auto;
+  padding: 0.1rem;
+}
+:host ::ng-deep .card.p-card{
+  height: 100%;
+
+  .p-card-content{
+    h4{
+      text-align: center;
+      font-family: Ebrima, serif;
+      font-size: 20px;
+      padding: 5px;
+    }
+    padding: 0rem;
+  }
+}
+.buttons{
+  display:flex;
+  justify-content: space-between;
+}
+
+:host ::ng-deep .errorCase.p-card{
+  height: auto;
+  padding: 0.1rem;
+}
+.errorsRegister{
+  margin-top: 15px;
+  width: auto;
+  justify-content: center;
+}
+
+
