@@ -11,6 +11,8 @@ import {RippleModule} from "primeng/ripple";
 import {InputTextModule} from "primeng/inputtext";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ToastModule} from "primeng/toast";
+import {DropdownModule} from "primeng/dropdown";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import {ToastModule} from "primeng/toast";
     RippleModule,
     InputTextModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
+    DropdownModule,
+    FormsModule
   ]
 })
 export class CustomerModule { }

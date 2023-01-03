@@ -3,6 +3,7 @@ import {Subscription} from "rxjs";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {PrimeNGConfig} from "primeng/api";
 import {CustomerService} from "../../../services/customer.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-page',
@@ -14,12 +15,20 @@ export class LoginPageComponent implements OnInit {
   loginForm!: FormGroup;
   successfulLogin!: boolean;
 
-  constructor(private _formBuilder: FormBuilder, private primengConfig: PrimeNGConfig, private _customerService: CustomerService) { }
+  constructor(private _router: Router, private _formBuilder: FormBuilder, private primengConfig: PrimeNGConfig, private _customerService: CustomerService) { }
 
   ngOnInit(): void {
+    this.checkLogin();
     this.createLoginForm();
     this.primengConfig.ripple = true;
   }
+
+  checkLogin() {
+    if (this._customerService.isLoggedIn()) {
+      this._router.navigate(['customer/details']).then()
+    }
+  }
+
 
   Login() {
     let currentMail = this.loginForm.controls['mail'].value.toString();
@@ -39,6 +48,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   goToRegisterPage() {
-
+    this._router.navigate(['/account/register']).then();
   }
+
 }

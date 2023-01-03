@@ -4,7 +4,7 @@
 
     <div>
       <img src="assets/images/login.png" width="50" height="50" alt="login-icon">
-      <h4 class="labelForm">Login Form</h4>
+      <h2 class="labelForm">Login Form</h2>
     </div>
 
     <form id ="formId" [formGroup]="loginForm" (ngSubmit)="Login()">
@@ -20,9 +20,9 @@
     </form>
     <p class="error" *ngIf="successfulLogin==false">Username or password that you have entered cannot be found!</p>
     <div class="toRegisterPageDiv">
-      <h6  (click)="goToRegisterPage()" class="toRegisterPage">
+      <h5  (click)="goToRegisterPage()" class="toRegisterPage">
         If you need an account Click Here!
-      </h6>
+      </h5>
     </div>
   </div>
 

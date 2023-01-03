@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
 
   goTo() {
     if(this._customerService.isLoggedIn()){
-      this.router.navigate(['store/products']).then()
+      this.router.navigate(['customer/details']).then()
     }
     else{
       this.router.navigate(['home']).then()

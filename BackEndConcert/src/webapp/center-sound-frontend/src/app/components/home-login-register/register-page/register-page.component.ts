@@ -5,6 +5,7 @@ import {Subscription} from "rxjs";
 import {CustomerControllerImplService} from "../../../api/services/customer-controller-impl.service";
 import {MessageService, PrimeNGConfig} from "primeng/api";
 import {Router} from "@angular/router";
+import {CustomerService} from "../../../services/customer.service";
 
 @Component({
   selector: 'app-register-page',
@@ -21,13 +22,21 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   containDigits = false;
   containCapitalLetter = false;
 
-  constructor(private _router: Router, private primengConfig: PrimeNGConfig, private messageService: MessageService, private _formBuilder: FormBuilder, private _customerService: CustomerControllerImplService) { }
+  constructor(private customerServiceL: CustomerService, private _router: Router, private primengConfig: PrimeNGConfig, private messageService: MessageService, private _formBuilder: FormBuilder, private _customerService: CustomerControllerImplService) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
     this.passwordChecker();
+    this.checkLogin();
     this.primengConfig.ripple = true;
   }
+
+  checkLogin() {
+    if (this.customerServiceL.isLoggedIn()) {
+      this._router.navigate(['customer/details']).then()
+    }
+  }
+
   private passwordChecker() {
     this._subscriptionList.push(
       this.registerForm.controls["password"].valueChanges.subscribe((pass: string) => {

@@ -19,11 +19,18 @@ export class CustomerDetailsComponent implements OnInit, OnDestroy {
   constructor(private primengConfig: PrimeNGConfig, private messageService: MessageService, private confirmationService: ConfirmationService,private orderController: OrderControllerService, private _customerController: CustomerControllerImplService, private _customerService: CustomerService) { }
   receivedCustomer: CustomerDto = { id: 1};
   orders!: OrderDto[];
+  statuses = [];
   selectedOrder!: OrderDto[] | null;
   ngOnInit(): void {
     this.getUserInfo();
     this.getAllOrders();
+    const x = ['CANCELED', 'ACCEPTED'];
     this.primengConfig.ripple = true;
+    x.forEach((value)=>{
+        // @ts-ignore
+        this.statuses.push({label: value, value: value},)
+      }
+    )
   }
 
   private getUserInfo() {
@@ -38,7 +45,7 @@ export class CustomerDetailsComponent implements OnInit, OnDestroy {
       this.orderController.ordersByCustomerIdUsingGET(this.receivedCustomer.id!).subscribe((orders: OrderDto[])=>{
         orders.forEach(order =>{
           const [year, month, day] = order.registeredAt!.toString().split(',');
-          order.registeredAt = new Date(+year, +month - 1, +day).toLocaleDateString();
+          order.registeredAt = new Date(+year, +month - 1, +day);
         })
         this.orders = orders;
       })
@@ -57,7 +64,7 @@ export class CustomerDetailsComponent implements OnInit, OnDestroy {
           this.orderController.cancelConcertTicketUsingPUT(id).subscribe({
             next:(order:OrderDto)=>{
               const [year, month, day] = order.registeredAt!.toString().split(',');
-              order.registeredAt = new Date(+year, +month - 1, +day).toLocaleDateString();
+              order.registeredAt = new Date(+year, +month - 1, +day);
               this.orders[this.findIndexById(id)] = order;
               this.orders = [...this.orders];
             }

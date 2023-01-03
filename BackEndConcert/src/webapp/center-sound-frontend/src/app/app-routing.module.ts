@@ -4,6 +4,7 @@ import {HomePageComponent} from "./components/home-login-register/home-page/home
 import {GuardLoginGuard} from "./guards/guard-login.guard";
 
 const routes: Routes = [
+  {path: '', component: HomePageComponent},
   {path: 'home', component: HomePageComponent},
   {path: 'account',loadChildren: () => import('./components/home-login-register/login-register-home.module').then((m)=>m.LoginRegisterHomeModule)},
   {path: 'customer', canActivate:[GuardLoginGuard], loadChildren:()=>import('./components/customer-info/customer.module').then((m)=>m.CustomerModule)},

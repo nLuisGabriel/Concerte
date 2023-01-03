@@ -6,7 +6,7 @@ export interface OrderDto {
   customerDto?: CustomerDto;
   id?: number;
   orderStatus?: 'ACCEPTED' | 'CANCELED';
-  registeredAt?: string;
+  registeredAt?: Date;
   tickets?: number;
   total?: number;
 }
