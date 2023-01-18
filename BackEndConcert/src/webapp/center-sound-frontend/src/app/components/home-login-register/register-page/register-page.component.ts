@@ -45,7 +45,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
         this.containSmallLetter = /[a-z]/.test(pass);
         this.correctSize = (pass.length >= 8 && pass.length <= 20);
         this.containSymbol = /[|\\/~^:,;?!&%$@*+]/.test(pass);
-
+        console.log(this.registerForm.controls["password"].valid)
       })
     );
   }
@@ -86,7 +86,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
       name: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
       verifyPassword: [null, [Validators.required]],
       age: [18, [Validators.min(18),Validators.max(150), Validators.required]],
-      phoneNumber: [null, [Validators.required, Validators.minLength(7)], Validators.pattern('[- +()0-9]+')]
+      phoneNumber: [null, [Validators.required, Validators.minLength(7), Validators.pattern('[- +()0-9]+')]]
     }, {validators: this.passMatcher})
   }
   passMatcher(c: AbstractControl): { [key: string]: boolean } | null {

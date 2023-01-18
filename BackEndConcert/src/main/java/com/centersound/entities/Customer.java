@@ -1,12 +1,11 @@
 package com.centersound.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 @Entity
@@ -26,6 +25,10 @@ public class Customer extends User{
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Order> orders;
+
+    @Lob
+    @Type(type="org.hibernate.type.BinaryType")
+    private byte[] profilePicture;
 
     public LocalDateTime getLocalDateTime() {
         return localDateTime;
@@ -59,5 +62,11 @@ public class Customer extends User{
         this.phoneNumber = phoneNumber;
     }
 
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
 }

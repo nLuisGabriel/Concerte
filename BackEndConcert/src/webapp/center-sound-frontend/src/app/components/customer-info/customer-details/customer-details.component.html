@@ -10,7 +10,10 @@
     <h5>Age: {{receivedCustomer.age}}</h5>
     <h5>Date of registration: {{receivedCustomer.localDateTime}}</h5>
     <h5>phoneNumber: {{receivedCustomer.phoneNumber}}</h5>
-  </p-panel>
+   <img id="myimage" [src]='base64Image' />
+
+
+ </p-panel>
 <div class="table-div">
   <p-table tableStyleClass="table-class" #dt1 [value]="orders" styleClass="p-datatable-striped  p-datatable-sm "
            [globalFilterFields]="['id','concertDto.name','total','orderStatus','registeredAt','tickets','concertDto.locationDto.country','concertDto.locationDto.town']" [rowHover]="true"
@@ -91,7 +94,6 @@
             {{order.orderStatus === 'ACCEPTED' ? 'Cancel Order' : 'Already closed'}}
           </button>
 
-
         </td>
       </tr>
     </ng-template>
@@ -102,3 +104,4 @@
 </div>
 <p-confirmDialog  [style]="{width: '450px'}"></p-confirmDialog>
 <p-toast position="bottom-center" key="tlr"></p-toast>
+

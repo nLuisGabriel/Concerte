@@ -11,6 +11,8 @@ public class CustomerDto extends UserDto{
     @JsonFormat(pattern = "yyyy-MM-dd hh-mm-ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime localDateTime;
 
+    private byte[] profilePicture;
+
     public String getName() {
         return name;
     }
@@ -41,5 +43,13 @@ public class CustomerDto extends UserDto{
 
     public void setLocalDateTime(LocalDateTime localDateTime) {
         this.localDateTime = localDateTime;
+    }
+
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }

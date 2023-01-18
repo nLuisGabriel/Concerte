@@ -7,4 +7,5 @@ export interface Customer {
   name?: string;
   password?: string;
   phoneNumber?: string;
+  profilePicture?: ArrayBuffer;
 }

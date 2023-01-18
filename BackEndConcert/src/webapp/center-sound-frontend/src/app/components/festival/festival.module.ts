@@ -30,6 +30,7 @@ import {DropdownModule} from "primeng/dropdown";
     FormsModule,
     ToastModule,
     DropdownModule
-  ]
+  ],
+  providers: []
 })
 export class FestivalModule { }

@@ -3,9 +3,10 @@ import {CustomerService} from "../../../services/customer.service";
 import {CustomerControllerImplService} from "../../../api/services/customer-controller-impl.service";
 import {CustomerDto} from "../../../api/models/customer-dto";
 import {OrderControllerService} from "../../../api/services/order-controller.service";
-import {Subscription} from "rxjs";
+import {Subscription, switchMap} from "rxjs";
 import {OrderDto} from "../../../api/models/order-dto";
 import {ConfirmationService, MessageService, PrimeNGConfig} from "primeng/api";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-customer-details',
@@ -16,14 +17,15 @@ import {ConfirmationService, MessageService, PrimeNGConfig} from "primeng/api";
 export class CustomerDetailsComponent implements OnInit, OnDestroy {
   private _subscriptionList: Subscription[] = [];
   email = this._customerService.getToken()!;
-  constructor(private primengConfig: PrimeNGConfig, private messageService: MessageService, private confirmationService: ConfirmationService,private orderController: OrderControllerService, private _customerController: CustomerControllerImplService, private _customerService: CustomerService) { }
-  receivedCustomer: CustomerDto = { id: 1};
+  constructor(private _sanitizer: DomSanitizer,private primengConfig: PrimeNGConfig, private messageService: MessageService, private confirmationService: ConfirmationService,private orderController: OrderControllerService, private _customerController: CustomerControllerImplService, private _customerService: CustomerService) { }
+  receivedCustomer: CustomerDto = {};
   orders!: OrderDto[];
   statuses = [];
   selectedOrder!: OrderDto[] | null;
+  base64Image!: any;
+
   ngOnInit(): void {
-    this.getUserInfo();
-    this.getAllOrders();
+    this.getAllCustomerInfo();
     const x = ['CANCELED', 'ACCEPTED'];
     this.primengConfig.ripple = true;
     x.forEach((value)=>{
@@ -33,24 +35,27 @@ export class CustomerDetailsComponent implements OnInit, OnDestroy {
     )
   }
 
-  private getUserInfo() {
-    this._subscriptionList.push(this._customerController.getLoggedCustomerInfoUsingGET(this.email).subscribe((customer: CustomerDto)=>{
-      console.log(customer);
-      this.receivedCustomer = customer;
-    }))
+  private getAllCustomerInfo(){
+
+    this._customerController.getLoggedCustomerInfoUsingGET(this.email).pipe(
+        switchMap((response: CustomerDto)=>{
+          console.log(response.profilePicture)
+          this.receivedCustomer = response;
+          let objectURL = 'data:image/jpeg;base64,' + response.profilePicture;
+          this.base64Image = this._sanitizer.bypassSecurityTrustUrl(objectURL);
+          return this.orderController.ordersByCustomerIdUsingGET(response.id!)
+        })
+      ).subscribe({
+        next: (orders: OrderDto[]) => {
+          orders.forEach(order =>{
+            const [year, month, day] = order.registeredAt!.toString().split(',');
+            order.registeredAt = new Date(+year, +month - 1, +day);
+          })
+          this.orders = orders;
+        }
+      })
   }
 
-  private getAllOrders() {
-    this._subscriptionList.push(
-      this.orderController.ordersByCustomerIdUsingGET(this.receivedCustomer.id!).subscribe((orders: OrderDto[])=>{
-        orders.forEach(order =>{
-          const [year, month, day] = order.registeredAt!.toString().split(',');
-          order.registeredAt = new Date(+year, +month - 1, +day);
-        })
-        this.orders = orders;
-      })
-    )
-  }
 
 
   cancelOrder(id:number) {
@@ -91,6 +96,9 @@ export class CustomerDetailsComponent implements OnInit, OnDestroy {
 
     return index;
   }
+
+
+
   ngOnDestroy(): void {
     this._subscriptionList.forEach((t: Subscription) => t.unsubscribe());
   }

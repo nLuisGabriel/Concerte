@@ -3,7 +3,8 @@ export interface CustomerDto {
   age?: number;
   email?: string;
   id?: number;
-  localDateTime?: string;
+  localDateTime?: Date;
   name?: string;
   phoneNumber?: string;
+  profilePicture?: ArrayBuffer;
 }

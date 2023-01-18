@@ -1,5 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
-import {BehaviorSubject, Subject} from "rxjs";
+import {BehaviorSubject, Subject, switchMap} from "rxjs";
 import {Router} from "@angular/router";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {CustomerControllerImplService} from "../api/services/customer-controller-impl.service";
@@ -11,7 +11,7 @@ import {CustomerDto} from "../api/models/customer-dto";
 export class CustomerService implements OnInit{
   public currentUser$: BehaviorSubject<string> = new BehaviorSubject<string>("");
   public isLoggedIn$: Subject<boolean> = new Subject<boolean>();
-  constructor(private router: Router, private http: HttpClient,private customerController: CustomerControllerImplService) { }
+  constructor(private _customerController: CustomerControllerImplService, private router: Router, private http: HttpClient,private customerController: CustomerControllerImplService) { }
 
   ngOnInit(): void {
   }
