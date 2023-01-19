@@ -4,15 +4,13 @@
       <img src="assets/images/free-user-icon-295-thumb.png" alt="custome-image" style="width:5%;height:5%;">
       Customer Details
     </ng-template>
+    <img id="myimage" [src]='thumbnail' />
     <h5>ID: {{receivedCustomer.id}}</h5>
     <h5>Name: {{receivedCustomer.name}}</h5>
     <h5>Email: {{receivedCustomer.email}}</h5>
     <h5>Age: {{receivedCustomer.age}}</h5>
     <h5>Date of registration: {{receivedCustomer.localDateTime}}</h5>
     <h5>phoneNumber: {{receivedCustomer.phoneNumber}}</h5>
-   <img id="myimage" [src]='base64Image' />
-
-
  </p-panel>
 <div class="table-div">
   <p-table tableStyleClass="table-class" #dt1 [value]="orders" styleClass="p-datatable-striped  p-datatable-sm "
@@ -104,4 +102,3 @@
 </div>
 <p-confirmDialog  [style]="{width: '450px'}"></p-confirmDialog>
 <p-toast position="bottom-center" key="tlr"></p-toast>
-

@@ -25,6 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.nio.file.Files;
 import java.time.ZoneId;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -129,15 +130,9 @@ public class CenterSound {
     }
 
     private byte[] extractVytes(String s) throws IOException {
-        // open image
-        File imgPath = new File(s);
-        BufferedImage bufferedImage = ImageIO.read(imgPath);
-
-        // get DataBufferBytes from Raster
-        WritableRaster raster = bufferedImage .getRaster();
-        DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
-
-        return ( data.getData() );
+        File fi = new File(s);
+        byte[] fileContent = Files.readAllBytes(fi.toPath());
+        return fileContent;
     }
 
     private void generateConcerts() {

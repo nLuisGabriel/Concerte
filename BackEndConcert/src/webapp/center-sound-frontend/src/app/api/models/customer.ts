@@ -3,7 +3,7 @@ export interface Customer {
   age?: number;
   email?: string;
   id?: number;
-  localDateTime?: string;
+  localDateTime?: Date;
   name?: string;
   password?: string;
   phoneNumber?: string;

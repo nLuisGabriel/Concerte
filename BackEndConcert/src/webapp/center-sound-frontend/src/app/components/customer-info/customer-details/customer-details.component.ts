@@ -22,7 +22,7 @@ export class CustomerDetailsComponent implements OnInit, OnDestroy {
   orders!: OrderDto[];
   statuses = [];
   selectedOrder!: OrderDto[] | null;
-  base64Image!: any;
+  thumbnail: any;
 
   ngOnInit(): void {
     this.getAllCustomerInfo();
@@ -42,7 +42,7 @@ export class CustomerDetailsComponent implements OnInit, OnDestroy {
           console.log(response.profilePicture)
           this.receivedCustomer = response;
           let objectURL = 'data:image/jpeg;base64,' + response.profilePicture;
-          this.base64Image = this._sanitizer.bypassSecurityTrustUrl(objectURL);
+          this.thumbnail = this._sanitizer.bypassSecurityTrustUrl(objectURL);
           return this.orderController.ordersByCustomerIdUsingGET(response.id!)
         })
       ).subscribe({
@@ -57,9 +57,7 @@ export class CustomerDetailsComponent implements OnInit, OnDestroy {
   }
 
 
-
   cancelOrder(id:number) {
-    console.log(this.selectedOrder)
     this.confirmationService.confirm({
       message: "Are you sure you want to cancel the selected order?",
       header: 'Confirm',
@@ -97,10 +95,7 @@ export class CustomerDetailsComponent implements OnInit, OnDestroy {
     return index;
   }
 
-
-
   ngOnDestroy(): void {
     this._subscriptionList.forEach((t: Subscription) => t.unsubscribe());
   }
-
 }

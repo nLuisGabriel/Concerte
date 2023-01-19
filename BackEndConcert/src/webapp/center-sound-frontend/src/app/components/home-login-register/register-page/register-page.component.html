@@ -45,12 +45,16 @@
           <small class="p-error" *ngIf="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched">Incorrect phoneNumber format!</small>
         </div>
 
+        <p-fileUpload [customUpload]="true" (onSelect)="myUploader($event)" (onClear)="removeImage($event)" (onRemove)="removeImage2($event)"
+                      accept="image/*"></p-fileUpload>
+
+
         <div class="buttons">
           <button [disabled]="this.registerForm.invalid" pButton type="submit" label="Register" ></button>
           <button (click)="toLoginPage()" pButton type="button" label="To login page" ></button>
         </div>
-
       </form>
+
       <div>
         <p-card styleClass="card">
           <ng-template pTemplate="header">
@@ -70,6 +74,7 @@
           <h4 >* Size: min=8 and max=20
             <i *ngIf="correctSize" class="pi pi-check"></i></h4>
         </p-card>
+
       </div>
     </div>
   </div>

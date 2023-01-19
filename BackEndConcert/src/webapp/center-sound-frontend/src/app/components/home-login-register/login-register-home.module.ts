@@ -15,6 +15,7 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-b
 import {PasswordModule} from "primeng/password";
 import {RippleModule} from "primeng/ripple";
 import {interceptorProviders} from "../../interceptors/interceptors";
+import {FileUploadModule} from "primeng/fileupload";
 
 
 ;
@@ -24,18 +25,19 @@ import {interceptorProviders} from "../../interceptors/interceptors";
     RegisterPageComponent,
     LoginPageComponent
   ],
-  imports: [
-    CommonModule,
-    LoginRegisterHomeRoutingModule,
-    ButtonModule,
-    GalleriaModule,
-    ReactiveFormsModule,
-    CardModule,
-    ToastModule,
-    InputTextModule,
-    PasswordModule,
-    RippleModule,
-  ],
+    imports: [
+        CommonModule,
+        LoginRegisterHomeRoutingModule,
+        ButtonModule,
+        GalleriaModule,
+        ReactiveFormsModule,
+        CardModule,
+        ToastModule,
+        InputTextModule,
+        PasswordModule,
+        RippleModule,
+        FileUploadModule,
+    ],
   providers: [
     PhotoService,
     interceptorProviders
