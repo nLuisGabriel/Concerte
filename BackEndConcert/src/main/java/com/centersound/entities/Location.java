@@ -9,17 +9,17 @@ public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Long id;
+    private Long id;
     @Column(name="country", nullable = false)
-    String country;
+    private String country;
     @Column(name="county", nullable = false)
-    String county;
+    private String county;
     @Column(name="town", nullable = false)
-    String town;
+    private String town;
     @Column(name="street", nullable = false)
-    String street;
+    private String street;
     @Column(name="streetNumber", nullable = false)
-    Integer streetNumber;
+    private Integer streetNumber;
 
     @OneToOne(mappedBy = "location")
     private Concert concert;
@@ -71,6 +71,8 @@ public class Location {
     public void setStreetNumber(Integer streetNumber) {
         this.streetNumber = streetNumber;
     }
+
+
 
     @Override
     public boolean equals(Object o) {

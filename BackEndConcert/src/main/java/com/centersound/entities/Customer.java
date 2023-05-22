@@ -1,25 +1,42 @@
 package com.centersound.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import javax.validation.constraints.Min;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
 @Table(name = "customers")
 public class Customer extends User{
     @Column(name = "name", nullable = false)
-    String name;
+    private String name;
     @Min(value = 4, message = "must be equal or greater than 4")
     @Column(name = "age", nullable = false)
-    Integer age;
+    private Integer age;
     @Column(name = "phone_number", nullable = false)
-    String phoneNumber;
+    private String phoneNumber;
 
-    @OneToMany(mappedBy = "customer")
-    Set<Order> orders;
+    @Column(name = "registration_date")
+    @JsonFormat(pattern = "yyyy-MM-dd hh-mm-ss", shape = JsonFormat.Shape.STRING)
+    private LocalDateTime localDateTime = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private Set<Order> orders;
+
+    @Lob
+    @Type(type="org.hibernate.type.BinaryType")
+    private byte[] profilePicture;
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
+    }
 
     public String getName() {
         return name;
@@ -45,7 +62,11 @@ public class Customer extends User{
         this.phoneNumber = phoneNumber;
     }
 
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 
-
-
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
 }

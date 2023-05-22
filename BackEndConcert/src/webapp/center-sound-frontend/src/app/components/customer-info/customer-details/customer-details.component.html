@@ -1,0 +1,104 @@
+<div class="customer-info">
+ <p-panel>
+    <ng-template pTemplate="header" >
+      <img src="assets/images/free-user-icon-295-thumb.png" alt="custome-image" style="width:5%;height:5%;">
+      Customer Details
+    </ng-template>
+    <img id="myimage" [src]='thumbnail' height="100px" />
+    <h5>ID: {{receivedCustomer.id}}</h5>
+    <h5>Name: {{receivedCustomer.name}}</h5>
+    <h5>Email: {{receivedCustomer.email}}</h5>
+    <h5>Age: {{receivedCustomer.age}}</h5>
+    <h5>Date of registration: {{receivedCustomer.localDateTime}}</h5>
+    <h5>phoneNumber: {{receivedCustomer.phoneNumber}}</h5>
+ </p-panel>
+<div class="table-div">
+  <p-table tableStyleClass="table-class" #dt1 [value]="orders" styleClass="p-datatable-striped  p-datatable-sm "
+           [globalFilterFields]="['id','concertDto.name','total','orderStatus','registeredAt','tickets','concertDto.locationDto.country','concertDto.locationDto.town']" [rowHover]="true"
+           [(selection)]="selectedOrder" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" dataKey="id" selectionMode="multiple"
+           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} order" >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">  <i class="pi pi-list" style="font-size: 22px"></i> Order List
+
+
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="id" >OrderID  <p-sortIcon field="id"></p-sortIcon> </th>
+        <th pSortableColumn="concertDto.name">Name <p-sortIcon field="concertDto.name"></p-sortIcon></th>
+        <th>Price<p-columnFilter type="numeric" field="total" display="menu" ></p-columnFilter> </th>
+        <th>Order Status
+          <p-columnFilter field="orderStatus" matchMode="equals" display="menu">
+            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+              <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any">
+                <ng-template let-option pTemplate="item">
+                  <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                </ng-template>
+              </p-dropdown>
+            </ng-template>
+          </p-columnFilter>
+        </th>
+        <th >Date <p-columnFilter type="date" field="registeredAt" display="menu"></p-columnFilter></th>
+        <th> Tickets<p-columnFilter type="numeric" field="tickets" display="menu" ></p-columnFilter></th>
+        <th pSortableColumn="concertDto.locationDto.country">Country <p-sortIcon field="concertDto.locationDto.country"></p-sortIcon></th>
+        <th pSortableColumn="concertDto.locationDto.town">Town <p-sortIcon field="concertDto.locationDto.town"></p-sortIcon></th>
+        <th>Options </th>
+
+      <tr>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'id', 'contains')" placeholder="Search by OrderID" class="p-column-filter">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'concertDto.name', 'contains')" placeholder="Search by Name" class="p-column-filter">
+        </th>
+        <th>
+          Select Filter Cost
+        </th>
+          <th>
+            Select Filter Status
+          </th>
+        <th>
+          Select Filter Date
+        </th>
+        <th>
+          Select Filter Tickets
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'concertDto.locationDto.country', 'contains')" placeholder="Search by Country" class="p-column-filter">
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'concertDto.locationDto.town', 'contains')" placeholder="Search by Town" class="p-column-filter">
+        </th>
+        <th>
+        </th>
+
+
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-order>
+      <tr>
+        <td>{{order.id}}</td>
+        <td>{{order.concertDto.name}}</td>
+        <td>{{order.total}}</td>
+        <td>{{order.orderStatus}}</td>
+        <td>{{order.registeredAt | date}}</td>
+        <td>{{order.tickets}}</td>
+        <td>{{order.concertDto.locationDto.country}}</td>
+        <td>{{order.concertDto.locationDto.town}}</td>
+        <td>
+          <button [disabled]="order.orderStatus=='CANCELED'" pButton pRipple title="Cancel Order" class="p-button-rounded p-button-secondary" (click)="cancelOrder(order.id)">
+            {{order.orderStatus === 'ACCEPTED' ? 'Cancel Order' : 'Already closed'}}
+          </button>
+
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</div>
+
+</div>
+<p-confirmDialog  [style]="{width: '450px'}"></p-confirmDialog>
+<p-toast position="bottom-center" key="tlr"></p-toast>

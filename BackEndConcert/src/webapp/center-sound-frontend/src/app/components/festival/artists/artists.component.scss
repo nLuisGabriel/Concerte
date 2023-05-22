@@ -1,0 +1,42 @@
+.card{
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+}
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.modern-table th, .modern-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.modern-table th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.modern-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.button:hover {
+  background-color: #45a049;
+}

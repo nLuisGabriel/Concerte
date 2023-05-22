@@ -3,6 +3,8 @@ package com.centersound.entities;
 import com.centersound.enums.OrderStatus;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,21 +12,44 @@ import java.time.LocalDateTime;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    @ManyToOne
+    private Long id;
+    @ManyToOne()
     @JoinColumn(name = "concert_id")
-    Concert concert;
+    private Concert concert;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "customer_id")
-    Customer customer;
+    private Customer customer;
 
     @Column(name = "registeredAt")
-    LocalDateTime registeredAt;
+    private LocalDateTime registeredAt = LocalDateTime.now();
 
     @Column(name = "orderStatus")
     @Enumerated(value = EnumType.STRING)
-    OrderStatus orderStatus;
+    private OrderStatus orderStatus;
+
+    @Column(name = "number_of_tickets" )
+    @Max(10)
+    private Long tickets;
+
+    @Column(name = "total")
+    private BigDecimal total;
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public Long getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Long tickets) {
+        this.tickets = tickets;
+    }
 
     public Long getId() {
         return id;

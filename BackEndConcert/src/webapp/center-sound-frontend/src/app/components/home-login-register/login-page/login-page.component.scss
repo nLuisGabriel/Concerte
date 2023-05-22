@@ -1,0 +1,51 @@
+.login-field{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.login-container{
+  margin-top: 130px;
+  margin-bottom: 50px;
+  width: 500px;
+  border-radius: 3px;
+  background-color: azure;
+  border: 3em solid azure;
+}
+form {
+  flex-direction: column;
+  text-align:center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+button{
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+
+}
+label { font-size: 17px; display: flex;
+  font-family: Ebrima, serif}
+input{
+  width: 100%;
+  display: flex;
+  margin-top: 6px;
+}
+.error{
+  margin-top: 20px;
+  color: red;
+}
+.toRegisterPage{
+  font-size: 16px;
+  margin-top: 10px
+}
+.toRegisterPage:hover{
+  color: darkblue;
+  text-decoration: underline darkblue;
+  text-underline-position: under;
+  cursor: pointer;
+
+}
+.toRegisterPageDiv{
+  width: fit-content;
+}
+

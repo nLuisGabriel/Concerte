@@ -13,20 +13,20 @@ import java.util.Set;
 public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
     @Column(name="name", nullable = false)
-    String name;
+    private String name;
     @Column(name="description", nullable = false)
-    String description;
+    private String description;
     @Column(name="birthDate", nullable = false)
-    LocalDate birthDate;
+    private LocalDate birthDate;
     @Enumerated(value = EnumType.STRING)
-    Gender gender;
+    private Gender gender;
     @Enumerated(value = EnumType.STRING)
-    GeographicRegion geographicRegion;
+    private GeographicRegion geographicRegion;
 
-    @ManyToMany(mappedBy = "artists")
-    Set<Concert> concerts;
+    @ManyToMany(mappedBy = "artists", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Concert> concerts;
 
     public Long getId() {
         return id;
