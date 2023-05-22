@@ -1,9 +1,7 @@
 package com.centersound.services;
 
 import com.centersound.dtos.OrderDto;
-import com.centersound.entities.Order;
 import com.centersound.exceptions.ToManyTicketsException;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 

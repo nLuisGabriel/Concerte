@@ -7,7 +7,7 @@ import com.centersound.enums.GeographicRegion;
 import com.centersound.enums.OrderStatus;
 import com.centersound.repositories.*;
 import com.github.javafaker.Faker;
-import org.apache.commons.io.IOUtils;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -16,14 +16,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.PostConstruct;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.time.ZoneId;
@@ -61,8 +56,6 @@ public class CenterSound {
 
     @PostConstruct
     private void population() throws IOException {
-
-
 
         if (concertRepository.count() == 0) {
             try {

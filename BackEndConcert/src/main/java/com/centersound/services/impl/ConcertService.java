@@ -28,7 +28,7 @@ public class ConcertService implements ConcertServiceInterface {
 
     @Override
     public List<ConcertDto> findAllByArtist(Long artistId) {
-        return this.concertListToConcertDtoList(concertRepository.concertsByArtistId(artistId), false);
+        return this.concertListToConcertDtoList(concertRepository.concertsByArtistId(artistId), true);
     }
 
     private List<ConcertDto> concertListToConcertDtoList(List<Concert> concertList, boolean allReferences){

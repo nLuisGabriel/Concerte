@@ -1,0 +1,62 @@
+
+<div class="card">
+  <p-dataView #dv [value]="artists" [rows]="5" [paginator]="true" class="w-8 mt-7">
+    <ng-template pTemplate="header">
+      <div class="flex text-2xl justify-content-center">
+        Artists
+      </div>
+    </ng-template>
+    <ng-template let-artist pTemplate="listItem">
+      <div class="col-12">
+        <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+          <img class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src="./assets/images/default.jpg" [alt]="artist.name" />
+          <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+            <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+              <div class="text-2xl font-bold text-900">{{ artist.name }}</div>
+              <div class="text-sm text-900">{{ artist.description }}</div>
+              <p-rating [(ngModel)]="rating" [readonly]="true" [cancel]="false"></p-rating>
+              <div class="flex align-items-center gap-3">
+                                <span class="flex align-items-center gap-2">
+                                    <i class="pi pi-tag"></i>
+                                    <span class="font-semibold">{{'Birth Date: ' + artist.birthDate }}</span>
+                                </span>
+                <p-tag [value]="artist.geographicRegion" ></p-tag>
+                <p-tag [value]="artist.gender" ></p-tag>
+              </div>
+            </div>
+            <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+              <span class="text-2xl font-semibold">{{'ArtistID: '+ artist.id }}</span>
+              <button (click)="searchConcertsByArtist(artist.id)" pButton icon="pi pi-search" styleClass="p-button-success" class="md:align-self-end mb-2 p-button-rounded"> - Cauta concerte asociate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataView>
+</div>
+
+<p-sidebar [(visible)]="sidebarVisible" [fullScreen]="true">
+  <table class="modern-table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Country-Town</th>
+      <th>Musical Category</th>
+      <th>Price</th>
+      <th></th> <!-- Coloana pentru butoane -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let concert of concertsByArtists">
+      <td>{{ concert.name }}</td>
+      <td>{{ concert.date | date }}</td>
+      <td>{{ concert.locationDto!.country! + '-' +  concert.locationDto!.town!}}</td>
+      <td>{{ concert.musicalCategoryDto!.category! }}</td>
+      <td>{{ concert.price }}</td>
+      <td><button (click)="goToConcert(concert)" class="button">GO TO CONCERT</button></td>
+    </tr>
+    </tbody>
+  </table>
+
+</p-sidebar>

@@ -31,6 +31,11 @@ export class HeaderComponent implements OnInit {
         }
       },
       {
+        label: "Artists", icon: PrimeIcons.MEGAPHONE, command: () => {
+          this.router.navigate(['festivals/artists']).then()
+        }
+      },
+      {
         label: "Account Details", icon: PrimeIcons.USERS, command: () => {
           this.router.navigate(['customer/details']).then()
         }

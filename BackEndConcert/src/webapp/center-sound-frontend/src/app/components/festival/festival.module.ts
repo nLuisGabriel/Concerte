@@ -13,10 +13,15 @@ import {InputNumberModule} from "primeng/inputnumber";
 import {FormsModule} from "@angular/forms";
 import {ToastModule} from "primeng/toast";
 import {DropdownModule} from "primeng/dropdown";
+import { ArtistsComponent } from './artists/artists.component';
+import {DataViewModule} from "primeng/dataview";
+import {RatingModule} from "primeng/rating";
+import {TagModule} from "primeng/tag";
+import {SidebarModule} from "primeng/sidebar";
 
 
 @NgModule({
-  declarations: [ConcertsComponent],
+  declarations: [ConcertsComponent, ArtistsComponent],
   imports: [
     CommonModule,
     FestivalRoutingModule,
@@ -29,7 +34,11 @@ import {DropdownModule} from "primeng/dropdown";
     InputNumberModule,
     FormsModule,
     ToastModule,
-    DropdownModule
+    DropdownModule,
+    DataViewModule,
+    RatingModule,
+    TagModule,
+    SidebarModule
   ],
   providers: []
 })

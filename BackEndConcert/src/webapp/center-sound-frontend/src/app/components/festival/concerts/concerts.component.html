@@ -5,7 +5,7 @@
              [(selection)]="selectedOrder" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" dataKey="id" selectionMode="multiple"
              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} concerts" >
       <ng-template pTemplate="caption">
-        <div class="flex align-items-center justify-content-between">  <i class="pi pi-list" style="font-size: 22px"></i> Concerts List
+        <div class="flex align-items-center justify-content-center gap-2">  <i class="pi pi-list" style="font-size: 22px"></i> Concerts List
 
 
         </div>
@@ -34,7 +34,7 @@
 
         <tr>
           <th>
-            <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'name', 'contains')" placeholder="Search by Name" class="p-column-filter">
+            <input pInputText type="text" [(ngModel)]="paramConcertName" (input)="dt1.filter($any($event.target).value, 'name', 'contains')" placeholder="Search by Name" class="p-column-filter">
           </th>
           <th>
             <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'musicalCategoryDto.category', 'contains')" placeholder="Search by Category" class="p-column-filter">

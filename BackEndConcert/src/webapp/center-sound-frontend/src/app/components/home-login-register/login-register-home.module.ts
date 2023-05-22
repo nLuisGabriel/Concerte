@@ -11,7 +11,6 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {CardModule} from "primeng/card";
 import {ToastModule} from "primeng/toast";
 import {InputTextModule} from "primeng/inputtext";
-import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {PasswordModule} from "primeng/password";
 import {RippleModule} from "primeng/ripple";
 import {interceptorProviders} from "../../interceptors/interceptors";

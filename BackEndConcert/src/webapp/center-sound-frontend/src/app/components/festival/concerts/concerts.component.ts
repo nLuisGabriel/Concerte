@@ -1,15 +1,17 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {ConcertControllerService} from "../../../api/services/concert-controller.service";
 import {ConcertDto} from "../../../api/models/concert-dto";
 import {Subscription} from "rxjs";
 import {CustomerDto} from "../../../api/models/customer-dto";
 import {CustomerControllerImplService} from "../../../api/services/customer-controller-impl.service";
 import {CustomerService} from "../../../services/customer.service";
-import {ConfirmationService, MessageService, PrimeNGConfig} from "primeng/api";
+import {ConfirmationService, FilterMetadata, MessageService, PrimeNGConfig} from "primeng/api";
 import { OrderControllerService} from "../../../api/services/order-controller.service";
 import {OrderDto} from "../../../api/models/order-dto";
 import {ArtistDto} from "../../../api/models/artist-dto";
 import {ArtistControllerService} from "../../../api/services/artist-controller.service";
+import {ActivatedRoute} from "@angular/router";
+import {Table} from "primeng/table";
 
 
 @Component({
@@ -19,6 +21,9 @@ import {ArtistControllerService} from "../../../api/services/artist-controller.s
   providers:[ConfirmationService, MessageService]
 })
 export class ConcertsComponent implements OnInit, OnDestroy {
+  @ViewChild('dt1') dt1!: Table;
+
+
   email = this._customerService.getToken()!;
   selectedOrder: any;
   concerts!: ConcertDto[];
@@ -31,8 +36,9 @@ export class ConcertsComponent implements OnInit, OnDestroy {
   statuses = [];
   displayArtists!: boolean;
   artistsList!: ArtistDto[];
-
-  constructor(private artistsController : ArtistControllerService, private _orderController: OrderControllerService,private primengConfig: PrimeNGConfig, private messageService: MessageService,private confirmationService: ConfirmationService,private concertController: ConcertControllerService, private _customerController: CustomerControllerImplService, private _customerService: CustomerService) { }
+  paramValue!: number;
+  paramConcertName!:string;
+  constructor(private route: ActivatedRoute, private artistsController : ArtistControllerService, private _orderController: OrderControllerService,private primengConfig: PrimeNGConfig, private messageService: MessageService,private confirmationService: ConfirmationService,private concertController: ConcertControllerService, private _customerController: CustomerControllerImplService, private _customerService: CustomerService) { }
 
   ngOnInit(): void {
     this.getAllConcerts();
@@ -53,6 +59,23 @@ export class ConcertsComponent implements OnInit, OnDestroy {
           concert.date = new Date(+year, +month - 1, +day);
         })
         this.concerts = concerts;
+        this._subscriptionList.push(
+          this.route.queryParams.subscribe(params => {
+            this.paramValue = params['concertID'];
+            if(!!this.paramValue) {
+              console.log(this.paramValue)
+              for(let i = 0 ; i< concerts.length; i++) {
+                if (concerts[i].id == this.paramValue!) {
+                  this.paramConcertName = concerts[i].name!;
+                  this.filterTable();
+                }
+              }
+            } else {
+              this.paramConcertName = '';
+              this.filterTable();
+            }
+          })
+        )
       })
     )
   }
@@ -117,6 +140,10 @@ export class ConcertsComponent implements OnInit, OnDestroy {
         this.artistsList = list;
       })
     )
+  }
+
+  filterTable() {
+    this.dt1.filter(this.paramConcertName, 'name', 'contains')
   }
 
   ngOnDestroy(): void {
